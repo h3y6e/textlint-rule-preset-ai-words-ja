@@ -2,7 +2,11 @@
 
 AI が書いた日本語に出てきやすい語と言い回しを見つける [textlint](https://textlint.github.io/) のプリセットです。
 
+<!-- textlint-disable ai-words-ja/no-ai-words -->
+
 英語をそのまま直訳したような動詞、日常では使わない硬い名詞、大げさな定型句、技術文書に比喩を持ち込む語を、形態素解析の結果で照合します。表層の文字列ではなく品詞と基本形を見るため、「効く」を 1 件書けば「効きます」「効かない」にも当たり、名詞の「有効」「効率」には当たりません。
+
+<!-- textlint-enable ai-words-ja/no-ai-words -->
 
 [@textlint-ja/textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) が文章の構造 (リストの形、見出しの強調、コロンの使い方) を見るのに対して、こちらは語そのものを見ます。同じ箇所で 2 種類の指摘が出ないよう、あちらがすでに拾う誇張表現や「〜することが可能」は入れていません。併用できます。
 
@@ -81,6 +85,8 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
 
 ## 検出する語
 
+<!-- textlint-disable ai-words-ja/no-ai-words -->
+
 | 語 | 言い換えの候補 |
 | --- | --- |
 | 効く | 有効になる / 適用される / 反映される |
@@ -120,6 +126,8 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
 | 原料 | 値そのもの / 定義 |
 | 場当たり | その場ごとに / 統一されずに |
 
+<!-- textlint-enable ai-words-ja/no-ai-words -->
+
 ## 辞書に語を足すには
 
 辞書は `src/dictionary.ts` にあります。[morpheme-match](https://azu.github.io/morpheme-match/) の Token 列で書き、品詞と基本形で照合します。語を足すときは 5 つに気をつけてください。
@@ -138,9 +146,12 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
 
 ```shell
 pnpm install
-pnpm test     # tsc の型チェックと mocha
-pnpm build    # 型定義と lib/ の出力
+pnpm test         # tsc の型チェックと mocha
+pnpm build        # 型定義と lib/ の出力
+pnpm lint:text    # README を textlint にかける
 ```
+
+README はこのプリセット自身と [preset-ja-technical-writing](https://github.com/textlint-ja/textlint-rule-preset-ja-technical-writing)、[preset-ja-spacing](https://github.com/textlint-ja/textlint-rule-preset-ja-spacing) でチェックしています。設定は `.textlintrc.json` にあります。「検出する語」の表は語そのものを並べているため、`textlint-disable` のコメントで囲んで除いています。
 
 ## ライセンス
 
