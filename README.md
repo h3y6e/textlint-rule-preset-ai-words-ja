@@ -71,7 +71,6 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
 主題を短く示しただけで打つ読点を指摘します。
 
 ```
-本記事では、Docker の基本的な使い方を解説します。
 ポイントは、次の 3 つです。
 結論は、シンプルです。
 ```
