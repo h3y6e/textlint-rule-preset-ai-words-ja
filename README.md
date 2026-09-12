@@ -12,7 +12,7 @@ AI が書いた日本語に出てきやすい単語と言い回しを見つけ�
 
 <!-- textlint-enable ai-words-ja/no-ai-words -->
 
-[@textlint-ja/textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) は文章の構造 (リストの形、見出しの強調、コロンの使い方) を見ます。textlint-rule-preset-ai-words-ja は単語そのものを検出対象としています。
+[@textlint-ja/textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) は文章の構造 (リストの形、見出しの強調、コロンの使い方) を検出します。一方で、textlint-rule-preset-ai-words-ja は単語そのものを検出対象としています。
 
 
 ## インストール
