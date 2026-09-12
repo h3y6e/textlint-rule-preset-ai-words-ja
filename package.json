@@ -1,0 +1,50 @@
+{
+  "name": "textlint-rule-preset-ai-words-ja",
+  "version": "1.0.0",
+  "description": "textlint preset that detects AI-flavored Japanese words and phrases",
+  "keywords": [
+    "textlintrule",
+    "textlint",
+    "japanese",
+    "ai"
+  ],
+  "homepage": "https://github.com/p1ass/textlint-rule-preset-ai-words-ja",
+  "bugs": {
+    "url": "https://github.com/p1ass/textlint-rule-preset-ai-words-ja/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/p1ass/textlint-rule-preset-ai-words-ja.git"
+  },
+  "license": "MIT",
+  "author": "p1ass",
+  "packageManager": "pnpm@10.8.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/",
+    "src/"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json --emitDeclarationOnly && textlint-scripts build",
+    "prepublishOnly": "npm run build",
+    "test": "textlint-scripts test",
+    "watch": "textlint-scripts build --watch"
+  },
+  "dependencies": {
+    "kuromojin": "^3.0.1",
+    "morpheme-match-textlint": "^2.0.6"
+  },
+  "devDependencies": {
+    "@textlint/types": "^15.8.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.10.2",
+    "textlint-scripts": "^15.8.0",
+    "textlint-tester": "^15.8.0",
+    "typescript": "^5.8.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

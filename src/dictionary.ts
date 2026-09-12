@@ -1,0 +1,203 @@
+import type { ExpectedTokenWithCapture } from "morpheme-match-textlint";
+
+export type DictionaryEntry = {
+    message: string;
+    tokens: ExpectedTokenWithCapture[];
+};
+
+const verb = (basicForm: string): ExpectedTokenWithCapture => ({
+    pos: "動詞",
+    pos_detail_1: "自立",
+    basic_form: basicForm
+});
+
+const noun = (basicForm: string): ExpectedTokenWithCapture => ({ pos: "名詞", basic_form: basicForm });
+
+const surface = (surfaceForm: string | string[]): ExpectedTokenWithCapture => ({ surface_form: surfaceForm });
+
+const ni: ExpectedTokenWithCapture = { pos: "助詞", pos_detail_1: "格助詞", surface_form: "に" };
+
+// ですます体では否定が「ません」になるため、両方の形を並べる。
+const negative: ExpectedTokenWithCapture = { surface_form: ["ない", "ませ"] };
+
+export const dictionary: DictionaryEntry[] = [
+    {
+        message: '"効く" は英語の直訳調です。"有効になる" "適用される" "反映される" などに言い換えられないか検討してください。',
+        tokens: [verb("効く")]
+    },
+    {
+        message:
+            '"壊れる" は英語の直訳調です。"動かなくなる" "破綻する" "誤った結果を返す" などに言い換えられないか検討してください。',
+        tokens: [verb("壊れる")]
+    },
+    {
+        // kuromoji は「自走」を 自 + 走 に割り、1 文字の「走」も basic_form が「走る」になる。活用形を並べて切り分ける。
+        message: '"走る" は英語の直訳調です。"実行される" "動作する" などに言い換えられないか検討してください。',
+        tokens: [
+            {
+                pos: "動詞",
+                pos_detail_1: "自立",
+                surface_form: ["走る", "走っ", "走り", "走ら", "走れ", "走ろ"]
+            }
+        ]
+    },
+    {
+        message: '"焼く" (焼き込む) は英語の直訳調です。"固定する" "埋め込む" などに言い換えられないか検討してください。',
+        tokens: [verb("焼く")]
+    },
+    {
+        message:
+            '"黙って" は英語の直訳調です。"気づかないまま" "警告を出さずに" "そのまま" などに言い換えられないか検討してください。',
+        tokens: [verb("黙る")]
+    },
+    {
+        // 「落ちる」単独では別義が多いため、格助詞の「に」を足してフォールバックの意味だけを拾う。
+        message:
+            '"〜に落ちる" をフォールバックの意味で使っていませんか。"〜に解決される" "〜が代わりに使われる" などに言い換えられないか検討してください。',
+        tokens: [ni, verb("落ちる")]
+    },
+    {
+        message: '"崩す" は英語の直訳調です。"見直す" "覆す" "前提を疑う" などに言い換えられないか検討してください。',
+        tokens: [verb("崩す")]
+    },
+    {
+        message: '"担う" は英語の直訳調です。"引き受ける" "受け持つ" "その役割を持つ" などに言い換えられないか検討してください。',
+        tokens: [verb("担う")]
+    },
+    {
+        // 「動かす」単独では「サーバを動かす」に当たるため、目的語の「値」を足す。
+        message: '"値を動かす" は "値を変更する" に言い換えられないか検討してください。',
+        tokens: [{ pos: "名詞", surface_form: "値" }, { pos: "助詞", surface_form: "を" }, verb("動かす")]
+    },
+    {
+        // 「引く」単独では「下線を引く」に当たるため、格助詞の「から」を足して読む意味だけを拾う。
+        message:
+            '"〜から引く" は "〜を参照する" に言い換えられないか検討してください。値を読む意味で "引く" を使うと、"下線を引く" のような本来の意味と混ざります。',
+        tokens: [{ pos: "助詞", pos_detail_1: "格助詞", surface_form: "から" }, verb("引く")]
+    },
+    {
+        message: '"経路" は硬い表現です。"ルート" "流れ" "道すじ" などに言い換えられないか検討してください。',
+        tokens: [noun("経路")]
+    },
+    {
+        message: '"死活" は硬い表現です。"生きているかどうか" "動いているかどうか" などに言い換えられないか検討してください。',
+        tokens: [noun("死活")]
+    },
+    {
+        message: '"置換" は硬い表現です。"置き換え" "書き換え" などに言い換えられないか検討してください。',
+        tokens: [noun("置換")]
+    },
+    {
+        message: '"漏れ" は硬い表現です。"抜け" "取りこぼし" などに言い換えられないか検討してください。',
+        tokens: [noun("漏れ")]
+    },
+    {
+        message: '"帰結" は硬い表現です。"結果" "行き着く先" などに言い換えられないか検討してください。',
+        tokens: [noun("帰結")]
+    },
+    {
+        message: '"論外" は硬い表現です。"検討に値しない" "話にならない" などに言い換えられないか検討してください。',
+        tokens: [noun("論外")]
+    },
+    {
+        message: '"原初" は硬い表現です。"最初の" "もともとの" などに言い換えられないか検討してください。',
+        tokens: [noun("原初")]
+    },
+    {
+        message: '"穴" は比喩として硬い表現です。"弱点" "抜け道" などに言い換えられないか検討してください。',
+        tokens: [noun("穴")]
+    },
+    {
+        message: '"向き" は比喩として硬い表現です。"方向" "どちらからどちらへか" などに言い換えられないか検討してください。',
+        tokens: [noun("向き")]
+    },
+    {
+        // kuromoji は「無差別」を 無 + 差別 に割る。
+        message: '"無差別" は硬い表現です。"見境なく" "区別せずに" などに言い換えられないか検討してください。',
+        tokens: [{ pos: "接頭詞", surface_form: "無" }, { pos: "名詞", basic_form: "差別" }]
+    },
+    {
+        message: '"正本" は硬い表現です。"唯一の正しい情報源" "拠りどころ" などに言い換えられないか検討してください。',
+        tokens: [noun("正本")]
+    },
+    {
+        message: '"部品" は硬い表現です。"パーツ" "コンポーネント" などに言い換えられないか検討してください。',
+        tokens: [noun("部品")]
+    },
+    {
+        message: '"検査" は硬い表現です。"チェック" "確かめる" "見る" などに言い換えられないか検討してください。',
+        tokens: [noun("検査")]
+    },
+    {
+        // kuromoji は「正典」を 正 + 典 に割る。
+        message: '"正典" は硬い表現です。"唯一の正しい情報源" "拠りどころ" などに言い換えられないか検討してください。',
+        tokens: [{ pos: "接頭詞", surface_form: "正" }, { pos: "名詞", surface_form: "典" }]
+    },
+    {
+        // 名詞単独では「光配線方式」に当たるため、助詞とサ変動詞まで含めて比喩の用法だけを拾う。
+        message: '"配線する" は英語の直訳調です。"つなぐ" "組み込む" "呼び出す" などに言い換えられないか検討してください。',
+        tokens: [ni, { pos: "名詞", basic_form: "配線" }, { pos: "動詞", pos_detail_1: "自立", basic_form: "する" }]
+    },
+    {
+        message:
+            '"いずれも" は硬い表現です。"どちらも" "3 つとも" のように、何を指しているかを書けないか検討してください。',
+        tokens: [
+            { pos: "名詞", pos_detail_1: "代名詞", basic_form: "いずれ" },
+            { pos: "助詞", pos_detail_1: "係助詞", surface_form: "も" }
+        ]
+    },
+    {
+        message: '"〜に他ならない" は大げさな言い回しです。"〜だ" と言い切れないか検討してください。',
+        tokens: [ni, surface("他"), surface(["なら", "なり"]), negative]
+    },
+    {
+        // かなで書くと「ほかなら」が 1 トークンになり、並びが変わる。
+        message: '"〜にほかならない" は大げさな言い回しです。"〜だ" と言い切れないか検討してください。',
+        tokens: [ni, surface(["ほかなら", "ほかなり"]), negative]
+    },
+    {
+        message: '"〜のみならず" は硬い表現です。"〜だけでなく" に言い換えられないか検討してください。',
+        tokens: [surface("のみ"), surface("なら"), surface("ず")]
+    },
+    {
+        message: '"〜という点で" は回りくどい言い回しです。何がどうなのかを直接書けないか検討してください。',
+        tokens: [surface("という"), surface("点"), surface("で")]
+    },
+    {
+        message: '"〜に過ぎない" は大げさな言い回しです。"〜だけだ" に言い換えられないか検討してください。',
+        tokens: [ni, surface(["過ぎ", "すぎ"]), negative]
+    },
+    {
+        message: '"太る" は比喩です。"容量が増える" "サイズが大きくなる" のように、何がどうなるかを書けないか検討してください。',
+        tokens: [verb("太る")]
+    },
+    {
+        message: '"見張る" は比喩です。"検出する" "確かめる" "監視する" などに言い換えられないか検討してください。',
+        tokens: [verb("見張る")]
+    },
+    {
+        message:
+            'CI の成否を色で表していませんか。"落ちる" "通る" "失敗する" "成功する" などに言い換えられないか検討してください。',
+        tokens: [
+            { pos: "形容詞", pos_detail_1: "自立", basic_form: "赤い" },
+            { pos: "動詞", pos_detail_1: "自立", basic_form: "なる" }
+        ]
+    },
+    {
+        message:
+            'CI の成否を色で表していませんか。"落ちる" "通る" "失敗する" "成功する" などに言い換えられないか検討してください。',
+        tokens: [
+            { pos: "名詞", surface_form: "緑" },
+            ni,
+            { pos: "動詞", pos_detail_1: "自立", basic_form: "なる" }
+        ]
+    },
+    {
+        message: '"原料" は製造の語です。値や定義を指すなら "値そのもの" "定義" などに言い換えられないか検討してください。',
+        tokens: [{ pos: "名詞", surface_form: "原料" }]
+    },
+    {
+        message: '"場当たり" は口語です。"その場ごとに" "統一されずに" などに言い換えられないか検討してください。',
+        tokens: [{ pos: "名詞", surface_form: "場当たり" }]
+    }
+];
