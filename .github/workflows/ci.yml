@@ -29,3 +29,24 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint:text
+
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm typecheck:scripts
+      - run: pnpm sync:example-version --check
+      - name: install example deps
+        working-directory: example
+        # 公開済みの版ではなく作業ツリーの実装でサンプルを動かす。
+        run: |
+          npm install
+          npm install --no-save ..
+      - run: pnpm check:example
