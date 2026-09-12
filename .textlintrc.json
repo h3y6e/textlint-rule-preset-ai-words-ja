@@ -3,19 +3,7 @@
     "comments": true
   },
   "rules": {
-    "preset-ja-technical-writing": {
-      "no-mix-dearu-desumasu": {
-        "preferInHeader": "",
-        "preferInBody": "ですます",
-        "preferInList": "ですます",
-        "strict": false
-      }
-    },
     "preset-ja-spacing": {
-      "ja-space-between-half-and-full-width": {
-        "space": "always",
-        "exceptPunctuation": true
-      },
       "ja-space-around-code": {
         "before": true,
         "after": true

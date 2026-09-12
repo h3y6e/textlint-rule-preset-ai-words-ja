@@ -25,7 +25,7 @@ const ni: ExpectedTokenWithCapture = {
 export const dictionary: DictionaryEntry[] = [
   {
     message:
-      '"効く" は英語の直訳です。"効果がある" "適用される" などに言い換えられないか検討してください。',
+      '"効く" は英語の直訳です。"重要である" "結果に影響する" などに言い換えられないか検討してください。',
     tokens: [verb("効く")],
   },
   {

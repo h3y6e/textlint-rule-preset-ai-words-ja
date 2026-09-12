@@ -1,6 +1,6 @@
 # textlint-rule-preset-ai-words-ja
 
-AI が書いた日本語に出てきやすい単語と言い回しを見つける [textlint](https://textlint.github.io/) のプリセットです。
+AIが書いた日本語に出てきやすい単語と言い回しを見つける [textlint](https://textlint.github.io/) のプリセットです。
 
 ## 概要
 
@@ -12,7 +12,7 @@ AI が書いた日本語に出てきやすい単語と言い回しを見つけ�
 
 <!-- textlint-enable ai-words-ja/no-ai-words -->
 
-[@textlint-ja/textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) は文章の構造 (リストの形、見出しの強調、コロンの使い方) を検出します。一方で、textlint-rule-preset-ai-words-ja は単語そのものを検出対象としています。
+[@textlint-ja/textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) は文章の構造 (リストの形、見出しの強調、コロンの使い方) を検出します。一方で、textlint-rule-preset-ai-words-jaは単語そのものを検出対象としています。
 
 
 ## インストール
@@ -85,7 +85,7 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
 
 | 語 | 言い換えの候補 |
 | --- | --- |
-| 効く | 効果がある / 適用される |
+| 効く | 重要である / 結果に影響する  |
 | 壊れる | 動かなくなる / 成り立たなくなる / 誤った結果になる |
 | 走る | 実行される / 動作する |
 | 焼く (焼き込む) | 固定する / 埋め込む |
