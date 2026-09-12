@@ -56,10 +56,6 @@ export const dictionary: DictionaryEntry[] = [
         tokens: [verb("崩す")]
     },
     {
-        message: '"担う" は英語の直訳調です。"引き受ける" "受け持つ" "その役割を持つ" などに言い換えられないか検討してください。',
-        tokens: [verb("担う")]
-    },
-    {
         // 「動かす」単独では「サーバを動かす」に当たるため、目的語の「値」を足す。
         message: '"値を動かす" は "値を変更する" に言い換えられないか検討してください。',
         tokens: [{ pos: "名詞", surface_form: "値" }, { pos: "助詞", surface_form: "を" }, verb("動かす")]
