@@ -37,7 +37,11 @@
     "test": "textlint-scripts test",
     "watch": "textlint-scripts build --watch",
     "lint:text": "pnpm build && textlint \"**/*.md\"",
-    "lint:text:fix": "pnpm build && textlint --fix \"**/*.md\""
+    "lint:text:fix": "pnpm build && textlint --fix \"**/*.md\"",
+    "check:example": "node scripts/check-example.mts",
+    "sync:example-version": "node scripts/sync-example-version.mts",
+    "typecheck:scripts": "tsc -p scripts/tsconfig.json",
+    "version": "node scripts/sync-example-version.mts && git add example/package.json"
   },
   "dependencies": {
     "kuromojin": "^3.0.1",
