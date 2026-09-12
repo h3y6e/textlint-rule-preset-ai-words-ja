@@ -98,7 +98,7 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
 | 漏れ | 抜け / 取りこぼし |
 | 帰結 | 結果 |
 | 原初 | 最初の / もともとの |
-| 穴 | 弱点 / 抜け道 |
+| 穴 | 考慮できていない箇所 / 見落とし |
 | 無差別 | 見境なく / 区別せずに |
 | 正本 | Single Source of Truth / 唯一の正しい情報源 / 拠りどころ |
 | 正典 | Single Source of Truth / 唯一の正しい情報源 / 拠りどころ |

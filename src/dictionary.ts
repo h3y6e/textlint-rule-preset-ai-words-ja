@@ -87,7 +87,7 @@ export const dictionary: DictionaryEntry[] = [
         tokens: [noun("原初")]
     },
     {
-        message: '"穴" は比喩です。"弱点" "抜け道" などに言い換えられないか検討してください。',
+        message: '"穴" は比喩です。"考慮できていない箇所" "見落とし" などに言い換えられないか検討してください。',
         tokens: [noun("穴")]
     },
     {
