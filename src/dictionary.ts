@@ -13,12 +13,7 @@ const verb = (basicForm: string): ExpectedTokenWithCapture => ({
 
 const noun = (basicForm: string): ExpectedTokenWithCapture => ({ pos: "名詞", basic_form: basicForm });
 
-const surface = (surfaceForm: string | string[]): ExpectedTokenWithCapture => ({ surface_form: surfaceForm });
-
 const ni: ExpectedTokenWithCapture = { pos: "助詞", pos_detail_1: "格助詞", surface_form: "に" };
-
-// ですます体では否定が「ません」になるため、両方の形を並べる。
-const negative: ExpectedTokenWithCapture = { surface_form: ["ない", "ませ"] };
 
 export const dictionary: DictionaryEntry[] = [
     {
@@ -137,35 +132,6 @@ export const dictionary: DictionaryEntry[] = [
         // 名詞単独では「光配線方式」に当たるため、助詞とサ変動詞まで含めて比喩の用法だけを拾う。
         message: '"配線する" は英語の直訳調です。"つなぐ" "組み込む" "呼び出す" などに言い換えられないか検討してください。',
         tokens: [ni, { pos: "名詞", basic_form: "配線" }, { pos: "動詞", pos_detail_1: "自立", basic_form: "する" }]
-    },
-    {
-        message:
-            '"いずれも" は硬い表現です。"どちらも" "3 つとも" のように、何を指しているかを書けないか検討してください。',
-        tokens: [
-            { pos: "名詞", pos_detail_1: "代名詞", basic_form: "いずれ" },
-            { pos: "助詞", pos_detail_1: "係助詞", surface_form: "も" }
-        ]
-    },
-    {
-        message: '"〜に他ならない" は大げさな言い回しです。"〜だ" と言い切れないか検討してください。',
-        tokens: [ni, surface("他"), surface(["なら", "なり"]), negative]
-    },
-    {
-        // かなで書くと「ほかなら」が 1 トークンになり、並びが変わる。
-        message: '"〜にほかならない" は大げさな言い回しです。"〜だ" と言い切れないか検討してください。',
-        tokens: [ni, surface(["ほかなら", "ほかなり"]), negative]
-    },
-    {
-        message: '"〜のみならず" は硬い表現です。"〜だけでなく" に言い換えられないか検討してください。',
-        tokens: [surface("のみ"), surface("なら"), surface("ず")]
-    },
-    {
-        message: '"〜という点で" は回りくどい言い回しです。何がどうなのかを直接書けないか検討してください。',
-        tokens: [surface("という"), surface("点"), surface("で")]
-    },
-    {
-        message: '"〜に過ぎない" は大げさな言い回しです。"〜だけだ" に言い換えられないか検討してください。',
-        tokens: [ni, surface(["過ぎ", "すぎ"]), negative]
     },
     {
         message: '"太る" は比喩です。"容量が増える" "サイズが大きくなる" のように、何がどうなるかを書けないか検討してください。',
