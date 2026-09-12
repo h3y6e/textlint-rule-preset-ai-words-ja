@@ -2,16 +2,17 @@
 
 `textlint-rule-preset-ai-words-ja` を実際に動かすサンプルです。
 
-`ai-generated-text.md` は AI に書かせた技術記事をそのまま置いたものです。手を入れていないので、このプリセットが拾う言い回しが残っています。
+`ai-generated-text.md` は AI に書かせた技術記事をそのまま配置しています。
+このファイルに対してtextlintを実行することで、どのような文章が検知されるか確かめることができます。
 
-## 動かす
+## 実行方法
 
 ```shell
 npm install
 npm run lint
 ```
 
-10 件の指摘が出ます。読点が 8 件、単語が 2 件です。
+実行すると、10 件の指摘が出ます。読点が 8 件、単語が 2 件です。
 
 ```
   7:6    error  主題を 5 文字示しただけで読点を打っています。  ai-words-ja/no-short-topic-comma
@@ -20,7 +21,7 @@ npm run lint
 
 ## 設定
 
-`.textlintrc.json` はプリセットを有効にするだけの最小の形です。
+`.textlintrc.json` はプリセットを有効にするだけの最小限のサンプルです。
 
 ```json
 {
@@ -30,4 +31,3 @@ npm run lint
 }
 ```
 
-指摘を絞りたいときのオプションは、リポジトリ直下の [README](../README.md) にあります。
