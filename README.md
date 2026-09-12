@@ -1,14 +1,19 @@
 # textlint-rule-preset-ai-words-ja
 
-AI が書いた日本語に出てきやすい語と言い回しを見つける [textlint](https://textlint.github.io/) のプリセットです。
+AI が書いた日本語に出てきやすい単語と言い回しを見つける [textlint](https://textlint.github.io/) のプリセットです。
+
+## 概要
 
 <!-- textlint-disable ai-words-ja/no-ai-words -->
 
-英語をそのまま直訳したような動詞、日常では使わない硬い名詞、大げさな定型句、技術文書に比喩を持ち込む語を、形態素解析の結果で照合します。表層の文字列ではなく品詞と基本形を見るため、「効く」を 1 件書けば「効きます」「効かない」にも当たり、名詞の「有効」「効率」には当たりません。
+英語をそのまま直訳したような動詞や日常では使わない硬い名詞、一般的ではない比喩表現で使われる単語を、形態素解析で検出します。
+
+形態素分析を用いているため、例えば「効く」を検出対象にすると、「効きます」「効かない」にもマッチするようにしています。
 
 <!-- textlint-enable ai-words-ja/no-ai-words -->
 
-[@textlint-ja/textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) が文章の構造 (リストの形、見出しの強調、コロンの使い方) を見るのに対して、こちらは語そのものを見ます。同じ箇所で 2 種類の指摘が出ないよう、あちらがすでに拾う誇張表現や「〜することが可能」は入れていません。併用できます。
+[@textlint-ja/textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) は文章の構造 (リストの形、見出しの強調、コロンの使い方) を見ます。textlint-rule-preset-ai-words-ja は単語そのものを検出対象としています。
+
 
 ## インストール
 
@@ -18,7 +23,7 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
 
 ## 使い方
 
-`.textlintrc.json` に書きます。
+`.textlintrc.json` にルールを追加してください。
 
 ```json
 {
@@ -28,14 +33,17 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
 }
 ```
 
-ルールごとに設定するときは、プリセット名の下にルール名を並べます。
+## ルールの個別設定
 
-```json
+以下のようにオプション値を設定することで、各ルールの挙動をカスタマイズできます。
+
+```json5
 {
   "rules": {
     "preset-ai-words-ja": {
       "no-ai-words": {
-        "allows": ["経路", "/検査|部品/"]
+        "allows": ["経路", "/検査|部品/"],
+        "severity": "warning" // デフォルトはerrorです
       },
       "no-short-topic-comma": {
         "maxLength": 3
@@ -45,29 +53,18 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
 }
 ```
 
-指摘のルール ID は `ai-words-ja/no-ai-words` の形で出ます。`severity` を下げたいときも同じ書き方で指定します。
-
-```json
-{
-  "rules": {
-    "preset-ai-words-ja": {
-      "no-ai-words": { "severity": "warning" }
-    }
-  }
-}
-```
 
 ## ルール
 
 ### `no-ai-words`
 
-辞書に載せた語と言い回しを指摘します。
+辞書に載せた単語と言い回しを指摘します。
 
-| オプション | 型 | 既定値 | 説明 |
+| オプション | 型 | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `allows` | `string[]` | `[]` | 指摘しない語です。スラッシュで囲めば正規表現になります |
+| `allows` | `string[]` | `[]` | 指摘されたくない単語がある場合に指定してください。正規表現も設定可能です。 (`"/検査\|部品/"`) |
 
-照合するのは、当たった箇所の文字列です。自分が普通に使う語まで指摘されるときは、ルールごと切らず `allows` へ足してください。
+
 
 ### `no-short-topic-comma`
 
@@ -77,13 +74,11 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
 議事録は、溜めても資産になりません。
 ```
 
-長い条件節の切れ目に打つ読点 (「Client Secret を安全に保管できない Public Client の場合は、」) は対象にしません。読点がそこで仕事をしているため、文頭からの文字数で切り分けています。
-
 | オプション | 型 | 既定値 | 説明 |
 | --- | --- | --- | --- |
 | `maxLength` | `number` | `5` | 文頭から読点までが何文字以内なら指摘するか |
 
-## 検出する語
+## 検出する単語
 
 <!-- textlint-disable ai-words-ja/no-ai-words -->
 
@@ -128,19 +123,6 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
 
 <!-- textlint-enable ai-words-ja/no-ai-words -->
 
-## 辞書に語を足すには
-
-辞書は `src/dictionary.ts` にあります。[morpheme-match](https://azu.github.io/morpheme-match/) の Token 列で書き、品詞と基本形で照合します。語を足すときは 5 つに気をつけてください。
-
-- **分かち書きを先に確かめます。** [Token ビューア](https://azu.github.io/morpheme-match/)に入れて、どう割れるかを見てください。「無差別」は `無[接頭詞] + 差別[名詞]` に割れるため、2 トークンで書きます。
-- **自分の文章での出現数を数えてから入れます。** すでに使っている語を入れると警告だらけになり、プリセットごと切ることになります。
-- **複数トークンに割れる語をパターンの先頭に置きません。** マッチャは途中で外れたときに現在のトークンを先頭から試し直さないため、当たらないことがあります。
-- **前後の語で分かち書きが変わる語は入れません。** たとえば「当たり外れ」は単体では `当たり[名詞] + 外れ[名詞]` ですが、「たびに当たり外れが」では `に当たり[助詞]` に融合します。
-- **汎用的な名詞は入れません。** スクリーンショットの意味で「絵」を禁止しようとすると、「お絵かき」「絵馬」のような本来の意味での使用に当たります。
-
-別義での発火が多い語は、格助詞を条件に足して切り出せることがあります。「落ちる」は単独だと「品質が落ちる」に当たるため、格助詞の「に」を前に置いてフォールバックの意味だけを拾っています。
-
-`test/no-ai-words.test.ts` に「検出したい例」と「検出してはいけない例」があります。語を足したら、どちらにも足してください。
 
 ## 開発
 
@@ -151,7 +133,7 @@ pnpm build        # 型定義と lib/ の出力
 pnpm lint:text    # README を textlint にかける
 ```
 
-README はこのプリセット自身と [preset-ja-technical-writing](https://github.com/textlint-ja/textlint-rule-preset-ja-technical-writing)、[preset-ja-spacing](https://github.com/textlint-ja/textlint-rule-preset-ja-spacing) でチェックしています。設定は `.textlintrc.json` にあります。「検出する語」の表は語そのものを並べているため、`textlint-disable` のコメントで囲んで除いています。
+README はこのプリセット自身と [preset-ja-technical-writing](https://github.com/textlint-ja/textlint-rule-preset-ja-technical-writing)、[preset-ja-spacing](https://github.com/textlint-ja/textlint-rule-preset-ja-spacing) でチェックしています。設定は `.textlintrc.json` にあります。「検出する単語」の表は単語そのものを並べているため、`textlint-disable` のコメントで囲んで除いています。
 
 ## ライセンス
 
