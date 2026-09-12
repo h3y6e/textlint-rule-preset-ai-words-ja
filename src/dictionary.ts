@@ -142,28 +142,7 @@ export const dictionary: DictionaryEntry[] = [
         tokens: [verb("見張る")]
     },
     {
-        message:
-            'CI の成否を色で表していませんか。"落ちる" "通る" "失敗する" "成功する" などに言い換えられないか検討してください。',
-        tokens: [
-            { pos: "形容詞", pos_detail_1: "自立", basic_form: "赤い" },
-            { pos: "動詞", pos_detail_1: "自立", basic_form: "なる" }
-        ]
-    },
-    {
-        message:
-            'CI の成否を色で表していませんか。"落ちる" "通る" "失敗する" "成功する" などに言い換えられないか検討してください。',
-        tokens: [
-            { pos: "名詞", surface_form: "緑" },
-            ni,
-            { pos: "動詞", pos_detail_1: "自立", basic_form: "なる" }
-        ]
-    },
-    {
         message: '"原料" は製造の語です。値や定義を指すなら "値そのもの" "定義" などに言い換えられないか検討してください。',
         tokens: [{ pos: "名詞", surface_form: "原料" }]
-    },
-    {
-        message: '"場当たり" は口語です。"その場ごとに" "統一されずに" などに言い換えられないか検討してください。',
-        tokens: [{ pos: "名詞", surface_form: "場当たり" }]
     }
 ];

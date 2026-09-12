@@ -111,9 +111,7 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
 | 〜に配線する | つなぐ / 組み込む / 呼び出す |
 | 太る | 容量が増える / サイズが大きくなる |
 | 見張る | 検出する / 確かめる / 監視する |
-| 赤くなる / 緑になる | 落ちる / 通る / 失敗する / 成功する |
 | 原料 | 値そのもの / 定義 |
-| 場当たり | その場ごとに / 統一されずに |
 
 <!-- textlint-enable ai-words-ja/no-ai-words -->
 
