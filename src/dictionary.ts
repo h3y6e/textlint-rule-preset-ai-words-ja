@@ -79,7 +79,7 @@ export const dictionary: DictionaryEntry[] = [
         tokens: [noun("漏れ")]
     },
     {
-        message: '"帰結" は硬い表現です。"結果" "行き着く先" などに言い換えられないか検討してください。',
+        message: '"帰結" は硬い表現です。"結果" に言い換えられないか検討してください。',
         tokens: [noun("帰結")]
     },
     {
