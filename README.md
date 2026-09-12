@@ -121,8 +121,6 @@ pnpm build        # 型定義と lib/ の出力
 pnpm lint:text    # README を textlint にかける
 ```
 
-README はこのプリセット自身と [preset-ja-technical-writing](https://github.com/textlint-ja/textlint-rule-preset-ja-technical-writing)、[preset-ja-spacing](https://github.com/textlint-ja/textlint-rule-preset-ja-spacing) でチェックしています。設定は `.textlintrc.json` にあります。「検出する単語」の表は単語そのものを並べているため、`textlint-disable` のコメントで囲んで除いています。
-
 ## ライセンス
 
 MIT
