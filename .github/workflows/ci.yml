@@ -45,8 +45,6 @@ jobs:
       - run: pnpm sync:example-version --check
       - name: install example deps
         working-directory: example
-        # 公開済みの版ではなく作業ツリーの実装でサンプルを動かす。
-        run: |
-          npm install
-          npm install --no-save ..
+        # 作業ツリーの実装でサンプルを動かす。先に素の npm install をすると、バージョンを上げたコミットで未公開の版を取りにいって失敗する。
+        run: npm install --no-save ..
       - run: pnpm check:example
