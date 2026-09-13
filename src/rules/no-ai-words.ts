@@ -25,9 +25,10 @@ const isDictionaryEntry = (value: unknown): value is DictionaryEntry => {
 };
 
 const loadDictionary = (path: string): DictionaryEntry[] => {
-    const entries: unknown = JSON.parse(readFileSync(path, "utf8"));
+    const file: unknown = JSON.parse(readFileSync(path, "utf8"));
+    const entries = typeof file === "object" && file !== null ? (file as Record<string, unknown>).entries : undefined;
     if (!Array.isArray(entries)) {
-        throw new Error(`${path} の辞書は配列で書いてください。`);
+        throw new Error(`${path} の辞書は、entries に配列を持つオブジェクトで書いてください。`);
     }
     entries.forEach((entry, index) => {
         if (!isDictionaryEntry(entry)) {

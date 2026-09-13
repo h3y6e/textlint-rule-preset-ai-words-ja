@@ -1,10 +1,12 @@
-[
-  {
-    "message": "\"醸成\" は避けたい表現です。",
-    "tokens": [{ "pos": "名詞", "basic_form": "醸成" }]
-  },
-  {
-    "message": "\"寄り添う\" は避けたい表現です。",
-    "tokens": [{ "pos": "動詞", "basic_form": "寄り添う" }]
-  }
-]
+{
+  "entries": [
+    {
+      "message": "\"醸成\" は避けたい表現です。",
+      "tokens": [{ "pos": "名詞", "basic_form": "醸成" }]
+    },
+    {
+      "message": "\"寄り添う\" は避けたい表現です。",
+      "tokens": [{ "pos": "動詞", "basic_form": "寄り添う" }]
+    }
+  ]
+}

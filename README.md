@@ -68,20 +68,22 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
 
 #### 辞書ファイルの書き方
 
-辞書ファイルはJSONの配列で、各要素に指摘のメッセージと、一致させたい形態素の条件の並びを書きます。
+辞書ファイルはJSONのオブジェクトで、`entries` の配列の各要素に指摘のメッセージと、一致させたい形態素の条件の並びを書きます。
 条件には [kuromojin](https://github.com/azu/kuromojin) のトークンのプロパティ (`surface_form`、`pos`、`pos_detail_1`、`basic_form` など) を使えます。`basic_form` で書くと活用形もまとめて検出できます。
 
 ```json
-[
-  {
-    "message": "\"醸成\" は避けたい表現です。",
-    "tokens": [{ "pos": "名詞", "basic_form": "醸成" }]
-  },
-  {
-    "message": "\"見張る\" は避けたい表現です。",
-    "tokens": [{ "pos": "動詞", "pos_detail_1": "自立", "basic_form": "見張る" }]
-  }
-]
+{
+  "entries": [
+    {
+      "message": "\"醸成\" は避けたい表現です。",
+      "tokens": [{ "pos": "名詞", "basic_form": "醸成" }]
+    },
+    {
+      "message": "\"見張る\" は避けたい表現です。",
+      "tokens": [{ "pos": "動詞", "pos_detail_1": "自立", "basic_form": "見張る" }]
+    }
+  ]
+}
 ```
 
 ```json
