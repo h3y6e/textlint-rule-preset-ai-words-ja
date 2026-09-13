@@ -123,7 +123,7 @@ tester.run("no-ai-words", rule, {
         {
             text: "この機能は静かに壊れます。",
             errors: [{ message: messageOf('"静かに"') }, { message: messageOf('"壊れる"') }],
-            description: "「静かに」と「壊れる」は言い換え先が違うので、同じ箇所で 2 件指摘する"
+            description: "「静かに」と「壊れる」は別の表現なので、同じ箇所で 2 件指摘する"
         },
         recorded("選考に落ちてしまいました。", '"〜に落ちる"', "落下や不合格"),
         recorded("通勤中に事故に遭いました。", '"事故"', "交通事故"),
