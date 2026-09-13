@@ -63,6 +63,38 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
 | オプション | 型 | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `allows` | `string[]` | `[]` | 指摘されたくない単語がある場合に指定してください。正規表現も設定可能です。 (`"/検査\|部品/"`) |
+| `dictionaryPath` | `string` | なし | 追加で検出したい単語を書いた辞書ファイルのパスです。相対パスは設定ファイルのディレクトリから解決します。 |
+| `useBuiltinDictionary` | `boolean` | `true` | `false` にすると内蔵の辞書を使わず、`dictionaryPath` の辞書だけで検出します。 |
+
+#### 辞書ファイルの書き方
+
+辞書ファイルはJSONの配列で、各要素に指摘のメッセージと、一致させたい形態素の条件の並びを書きます。
+条件には [kuromojin](https://github.com/azu/kuromojin) のトークンのプロパティ (`surface_form`、`pos`、`pos_detail_1`、`basic_form` など) を使えます。`basic_form` で書くと活用形もまとめて検出できます。
+
+```json
+[
+  {
+    "message": "\"醸成\" は避けたい表現です。",
+    "tokens": [{ "pos": "名詞", "basic_form": "醸成" }]
+  },
+  {
+    "message": "\"寄り添う\" は避けたい表現です。",
+    "tokens": [{ "pos": "動詞", "basic_form": "寄り添う" }]
+  }
+]
+```
+
+```json
+{
+  "rules": {
+    "preset-ai-words-ja": {
+      "no-ai-words": {
+        "dictionaryPath": "./ai-words.json"
+      }
+    }
+  }
+}
+```
 
 
 

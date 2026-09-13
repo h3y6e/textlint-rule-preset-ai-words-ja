@@ -1,10 +1,40 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import type { TextlintRuleModule, TextlintRuleReporter } from "@textlint/types";
 import { tokenize } from "kuromojin";
 import { createTextlintMatcher } from "morpheme-match-textlint";
-import { dictionary } from "../dictionary";
+import { type DictionaryEntry, dictionary } from "../dictionary";
 
 export type Options = {
     allows?: string[];
+    dictionaryPath?: string;
+    useBuiltinDictionary?: boolean;
+};
+
+const isDictionaryEntry = (value: unknown): value is DictionaryEntry => {
+    if (typeof value !== "object" || value === null) {
+        return false;
+    }
+    const { message, tokens } = value as Record<string, unknown>;
+    return (
+        typeof message === "string" &&
+        Array.isArray(tokens) &&
+        tokens.length > 0 &&
+        tokens.every((token) => typeof token === "object" && token !== null && !Array.isArray(token))
+    );
+};
+
+const loadDictionary = (path: string): DictionaryEntry[] => {
+    const entries: unknown = JSON.parse(readFileSync(path, "utf8"));
+    if (!Array.isArray(entries)) {
+        throw new Error(`${path} の辞書は配列で書いてください。`);
+    }
+    entries.forEach((entry, index) => {
+        if (!isDictionaryEntry(entry)) {
+            throw new Error(`${path} の ${index} 番目の要素は、message と 1 つ以上の tokens を持つオブジェクトで書いてください。`);
+        }
+    });
+    return entries;
 };
 
 const REGEXP_LITERAL = /^\/(.+)\/([gimsuy]*)$/;
@@ -22,10 +52,15 @@ const createTester = (pattern: string): ((text: string) => boolean) => {
 const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
     const { Syntax, RuleError, report, getSource } = context;
     const testers = (options.allows ?? []).map(createTester);
+    const userDictionary =
+        options.dictionaryPath === undefined
+            ? []
+            : loadDictionary(resolve(context.getConfigBaseDir() ?? process.cwd(), options.dictionaryPath));
+    const builtinDictionary = (options.useBuiltinDictionary ?? true) ? dictionary : [];
     // kuromojin は readonly の配列を返すので、複製してから渡す。
     const matchAll = createTextlintMatcher({
         tokenize: async (text) => [...(await tokenize(text))],
-        dictionaries: dictionary
+        dictionaries: [...builtinDictionary, ...userDictionary]
     });
     return {
         async [Syntax.Str](node) {
