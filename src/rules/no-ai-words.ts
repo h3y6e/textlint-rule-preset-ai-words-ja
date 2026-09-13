@@ -1,10 +1,41 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import type { TextlintRuleModule, TextlintRuleReporter } from "@textlint/types";
 import { tokenize } from "kuromojin";
 import { createTextlintMatcher } from "morpheme-match-textlint";
-import { dictionary } from "../dictionary";
+import { type DictionaryEntry, dictionary } from "../dictionary";
 
 export type Options = {
     allows?: string[];
+    dictionaryPath?: string;
+    dictionaryMode?: "append" | "override";
+};
+
+const isDictionaryEntry = (value: unknown): value is DictionaryEntry => {
+    if (typeof value !== "object" || value === null) {
+        return false;
+    }
+    const { message, tokens } = value as Record<string, unknown>;
+    return (
+        typeof message === "string" &&
+        Array.isArray(tokens) &&
+        tokens.length > 0 &&
+        tokens.every((token) => typeof token === "object" && token !== null && !Array.isArray(token))
+    );
+};
+
+const loadDictionary = (path: string): DictionaryEntry[] => {
+    const file: unknown = JSON.parse(readFileSync(path, "utf8"));
+    const entries = typeof file === "object" && file !== null ? (file as Record<string, unknown>).entries : undefined;
+    if (!Array.isArray(entries)) {
+        throw new Error(`${path} の辞書は、entries に配列を持つオブジェクトで書いてください。`);
+    }
+    entries.forEach((entry, index) => {
+        if (!isDictionaryEntry(entry)) {
+            throw new Error(`${path} の ${index} 番目の要素は、message と 1 つ以上の tokens を持つオブジェクトで書いてください。`);
+        }
+    });
+    return entries;
 };
 
 const REGEXP_LITERAL = /^\/(.+)\/([gimsuy]*)$/;
@@ -22,10 +53,22 @@ const createTester = (pattern: string): ((text: string) => boolean) => {
 const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
     const { Syntax, RuleError, report, getSource } = context;
     const testers = (options.allows ?? []).map(createTester);
+    const mode = options.dictionaryMode ?? "append";
+    if (mode !== "append" && mode !== "override") {
+        throw new Error(`dictionaryMode には "append" か "override" を指定してください。`);
+    }
+    if (mode === "override" && options.dictionaryPath === undefined) {
+        throw new Error(`dictionaryMode を "override" にするときは dictionaryPath も指定してください。`);
+    }
+    const userDictionary =
+        options.dictionaryPath === undefined
+            ? []
+            : loadDictionary(resolve(context.getConfigBaseDir() ?? process.cwd(), options.dictionaryPath));
+    const dictionaries = mode === "override" ? userDictionary : [...dictionary, ...userDictionary];
     // kuromojin は readonly の配列を返すので、複製してから渡す。
     const matchAll = createTextlintMatcher({
         tokenize: async (text) => [...(await tokenize(text))],
-        dictionaries: dictionary
+        dictionaries
     });
     return {
         async [Syntax.Str](node) {

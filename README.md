@@ -63,6 +63,40 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
 | オプション | 型 | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `allows` | `string[]` | `[]` | 指摘されたくない単語がある場合に指定してください。正規表現も設定可能です。 (`"/検査\|部品/"`) |
+| `dictionaryPath` | `string` | なし | 追加で検出したい単語を書いた辞書ファイルのパスです。相対パスは設定ファイルのディレクトリから解決します。 |
+| `dictionaryMode` | `"append" \| "override"` | `"append"` | `dictionaryPath` の辞書の読み込み方です。`"append"` は内蔵の辞書に追加し、`"override"` は内蔵の辞書を使わず `dictionaryPath` の辞書だけで検出します。 |
+
+#### 辞書ファイルの書き方
+
+辞書ファイルはJSONのオブジェクトで、`entries` の配列の各要素に指摘のメッセージと、一致させたい形態素の条件の並びを書きます。
+条件には [kuromojin](https://github.com/azu/kuromojin) のトークンのプロパティ (`surface_form`、`pos`、`pos_detail_1`、`basic_form` など) を使えます。`basic_form` で書くと活用形もまとめて検出できます。
+
+```json
+{
+  "entries": [
+    {
+      "message": "\"醸成\" は避けたい表現です。",
+      "tokens": [{ "pos": "名詞", "basic_form": "醸成" }]
+    },
+    {
+      "message": "\"見張る\" は避けたい表現です。",
+      "tokens": [{ "pos": "動詞", "pos_detail_1": "自立", "basic_form": "見張る" }]
+    }
+  ]
+}
+```
+
+```json
+{
+  "rules": {
+    "preset-ai-words-ja": {
+      "no-ai-words": {
+        "dictionaryPath": "./ai-words.json"
+      }
+    }
+  }
+}
+```
 
 
 

@@ -4,6 +4,8 @@ import rule from "../src/rules/no-ai-words";
 
 const tester = new TextLintTester();
 
+const userDictionaryPath = `${__dirname}/fixtures/dictionary.json`;
+
 // 辞書のメッセージを引き当てて期待値にする。同じ語に対して 2 つ以上の書き方が残っていたら落とす。
 const messageOf = (keyword: string): string => {
     const messages = [...new Set(dictionary.filter((entry) => entry.message.includes(keyword)).map((entry) => entry.message))];
@@ -61,9 +63,26 @@ tester.run("no-ai-words", rule, {
             text: "生の値の検査を CI で回します。",
             options: { allows: ["/検査|部品/"] },
             description: "allows は正規表現でも書ける"
+        },
+        {
+            text: "MDX の経路が 2 つあります。",
+            options: { dictionaryPath: userDictionaryPath, dictionaryMode: "override" },
+            description: "dictionaryMode を override にすると内蔵の辞書の語は指摘しない"
         }
     ],
     invalid: [
+        {
+            text: "チームの文化を醸成し、利用者に寄り添いました。",
+            options: { dictionaryPath: userDictionaryPath },
+            errors: [{ message: '"醸成" は避けたい表現です。' }, { message: '"寄り添う" は避けたい表現です。' }],
+            description: "dictionaryPath の辞書の語を、活用形も含めて指摘する"
+        },
+        {
+            text: "この設定が効きます。文化を醸成します。",
+            options: { dictionaryPath: userDictionaryPath },
+            errors: [{ message: messageOf('"効く"') }, { message: '"醸成" は避けたい表現です。' }],
+            description: "dictionaryPath を指定しても内蔵の辞書の語は指摘する"
+        },
         invalid("この設定が効きます。", '"効く"'),
         invalid("インデックスが効かない。", '"効く"'),
         invalid("同名の記事を書いた時点で壊れます。", '"壊れる"'),
