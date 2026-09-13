@@ -8,6 +8,6 @@ export default {
     },
     rulesConfig: {
         "no-ai-words": true,
-        "no-short-topic-comma": true
+        "no-short-topic-comma": false
     }
 };
