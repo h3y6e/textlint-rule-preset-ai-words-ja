@@ -78,8 +78,8 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
     "tokens": [{ "pos": "名詞", "basic_form": "醸成" }]
   },
   {
-    "message": "\"寄り添う\" は避けたい表現です。",
-    "tokens": [{ "pos": "動詞", "basic_form": "寄り添う" }]
+    "message": "\"見張る\" は避けたい表現です。",
+    "tokens": [{ "pos": "動詞", "pos_detail_1": "自立", "basic_form": "見張る" }]
   }
 ]
 ```
