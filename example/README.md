@@ -17,46 +17,38 @@ npm run lint
 <!-- lint-output:start -->
 ```
 ai-generated-text.md
-    3:37  error  "入口" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。          ai-words-ja/no-ai-words
-    3:48  error  "道具" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。          ai-words-ja/no-ai-words
-    7:6   error  主題を 5 文字示しただけで読点を打っています。読点を外すか、文を組み替えられないか検討してください。  ai-words-ja/no-short-topic-comma
-    9:26  error  "踏み込む" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。      ai-words-ja/no-ai-words
-   11:27  error  "照合" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。          ai-words-ja/no-ai-words
-   11:55  error  "実測" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。          ai-words-ja/no-ai-words
-   11:70  error  "切り分ける" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。    ai-words-ja/no-ai-words
-   15:16  error  "核心" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。          ai-words-ja/no-ai-words
-   27:37  error  "構図" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。          ai-words-ja/no-ai-words
-   29:12  error  "線引き" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
-   35:16  error  "効く" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。          ai-words-ja/no-ai-words
-   37:33  error  "効く" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。          ai-words-ja/no-ai-words
-   39:4   error  主題を 3 文字示しただけで読点を打っています。読点を外すか、文を組み替えられないか検討してください。  ai-words-ja/no-short-topic-comma
-   43:25  error  "混ざる" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
-   45:17  error  "見落とす" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。      ai-words-ja/no-ai-words
-   47:26  error  "事故" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。          ai-words-ja/no-ai-words
-   49:32  error  "切り分ける" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。    ai-words-ja/no-ai-words
-   55:14  error  "土台" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。          ai-words-ja/no-ai-words
-   57:7   error  "土台" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。          ai-words-ja/no-ai-words
-   59:3   error  "構図" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。          ai-words-ja/no-ai-words
-   59:6   error  主題を 5 文字示しただけで読点を打っています。読点を外すか、文を組み替えられないか検討してください。  ai-words-ja/no-short-topic-comma
-   65:4   error  主題を 3 文字示しただけで読点を打っています。読点を外すか、文を組み替えられないか検討してください。  ai-words-ja/no-short-topic-comma
-   69:29  error  "〜した瞬間" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。    ai-words-ja/no-ai-words
-   69:37  error  "破綻" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。          ai-words-ja/no-ai-words
-   75:3   error  "線引き" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
-   79:12  error  "照合" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。          ai-words-ja/no-ai-words
-   82:7   error  "実測" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。          ai-words-ja/no-ai-words
-   83:13  error  "切り分ける" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。    ai-words-ja/no-ai-words
-   87:19  error  "踏み込む" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。      ai-words-ja/no-ai-words
-  105:6   error  主題を 5 文字示しただけで読点を打っています。読点を外すか、文を組み替えられないか検討してください。  ai-words-ja/no-short-topic-comma
-  113:4   error  "見落とす" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。      ai-words-ja/no-ai-words
-  115:20  error  "切り分ける" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。    ai-words-ja/no-ai-words
-  121:4   error  主題を 3 文字示しただけで読点を打っています。読点を外すか、文を組み替えられないか検討してください。  ai-words-ja/no-short-topic-comma
-  155:36  error  "土台" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。          ai-words-ja/no-ai-words
-  161:55  error  "入口" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。          ai-words-ja/no-ai-words
-  167:6   error  主題を 5 文字示しただけで読点を打っています。読点を外すか、文を組み替えられないか検討してください。  ai-words-ja/no-short-topic-comma
-  177:9   error  "踏み込む" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。      ai-words-ja/no-ai-words
-  179:4   error  主題を 3 文字示しただけで読点を打っています。読点を外すか、文を組み替えられないか検討してください。  ai-words-ja/no-short-topic-comma
+    3:37  error  "入口" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
+    3:48  error  "道具" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
+    9:26  error  "踏み込む" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。    ai-words-ja/no-ai-words
+   11:27  error  "照合" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
+   11:55  error  "実測" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
+   11:70  error  "切り分ける" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。  ai-words-ja/no-ai-words
+   15:16  error  "核心" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
+   27:37  error  "構図" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
+   29:12  error  "線引き" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。      ai-words-ja/no-ai-words
+   35:16  error  "効く" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
+   37:33  error  "効く" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
+   43:25  error  "混ざる" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。      ai-words-ja/no-ai-words
+   45:17  error  "見落とす" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。    ai-words-ja/no-ai-words
+   47:26  error  "事故" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
+   49:32  error  "切り分ける" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。  ai-words-ja/no-ai-words
+   55:14  error  "土台" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
+   57:7   error  "土台" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
+   59:3   error  "構図" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
+   69:29  error  "〜した瞬間" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。  ai-words-ja/no-ai-words
+   69:37  error  "破綻" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
+   75:3   error  "線引き" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。      ai-words-ja/no-ai-words
+   79:12  error  "照合" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
+   82:7   error  "実測" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
+   83:13  error  "切り分ける" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。  ai-words-ja/no-ai-words
+   87:19  error  "踏み込む" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。    ai-words-ja/no-ai-words
+  113:4   error  "見落とす" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。    ai-words-ja/no-ai-words
+  115:20  error  "切り分ける" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。  ai-words-ja/no-ai-words
+  155:36  error  "土台" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
+  161:55  error  "入口" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。        ai-words-ja/no-ai-words
+  177:9   error  "踏み込む" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。    ai-words-ja/no-ai-words
 
-✖ 38 problems (38 errors, 0 warnings, 0 infos)
+✖ 30 problems (30 errors, 0 warnings, 0 infos)
 ```
 <!-- lint-output:end -->
 
