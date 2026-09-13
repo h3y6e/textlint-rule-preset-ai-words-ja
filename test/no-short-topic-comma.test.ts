@@ -29,6 +29,16 @@ tester.run("no-short-topic-comma", rule, {
             description: "2 文目でも文頭から数え直す"
         },
         {
+            text: "前提を確認します。\n結論は、まだ出ていません。",
+            errors: [{ message: message(3) }],
+            description: "改行を主題の文字数に数えない"
+        },
+        {
+            text: "前提を確認する\n結論は、まだ出ていません。",
+            errors: [{ message: message(3) }],
+            description: "句点のない行の後でも改行から数え直す"
+        },
+        {
             text: "Client Secret を安全に保管できない Public Client の場合は、認可コードを使います。",
             options: { maxLength: 50 },
             errors: [{ message: message(43) }],

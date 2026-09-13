@@ -39,9 +39,13 @@ const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
                         );
                     }
                 }
+                const lastNewline = token.surface_form.lastIndexOf("\n");
                 offset += token.surface_form.length;
                 if (isSentenceEnd(token)) {
                     sentenceStart = offset;
+                } else if (lastNewline !== -1) {
+                    // 段落の中の改行は Str に残るので、行頭を文頭として数え直す。
+                    sentenceStart = offset - token.surface_form.length + lastNewline + 1;
                 }
                 previous = token;
             }
