@@ -1,6 +1,6 @@
 {
   "name": "textlint-rule-preset-ai-words-ja-example",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "private": true,
   "description": "textlint-rule-preset-ai-words-ja を動かすサンプル",
   "scripts": {
@@ -8,6 +8,6 @@
   },
   "devDependencies": {
     "textlint": "^15.8.0",
-    "textlint-rule-preset-ai-words-ja": "^1.1.1"
+    "textlint-rule-preset-ai-words-ja": "^1.1.2"
   }
 }
