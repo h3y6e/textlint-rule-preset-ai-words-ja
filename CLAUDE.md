@@ -2,13 +2,7 @@
 
 ## リリース
 
-1. ルートの `package.json` の `version` を上げる
-2. `pnpm sync:example-version` を実行して `example/package.json` を揃える
-3. コミットし、`v<version>` タグをpushする
-
-`example/package.json` の `version` と `devDependencies` のバージョン範囲は、ルートの `version` に追従させる。
-`npm version` や `pnpm version` を使う場合は `version` スクリプトが同期まで済ませる。
-ずれたままpushするとCIとreleaseが落ちる。
+リリースは `release` スキルの手順に従う。
 
 ## example
 
