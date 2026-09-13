@@ -64,7 +64,7 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
 | --- | --- | --- | --- |
 | `allows` | `string[]` | `[]` | 指摘されたくない単語がある場合に指定してください。正規表現も設定可能です。 (`"/検査\|部品/"`) |
 | `dictionaryPath` | `string` | なし | 追加で検出したい単語を書いた辞書ファイルのパスです。相対パスは設定ファイルのディレクトリから解決します。 |
-| `useBuiltinDictionary` | `boolean` | `true` | `false` にすると内蔵の辞書を使わず、`dictionaryPath` の辞書だけで検出します。 |
+| `dictionaryMode` | `"append" \| "override"` | `"append"` | `dictionaryPath` の辞書の読み込み方です。`"append"` は内蔵の辞書に追加し、`"override"` は内蔵の辞書を使わず `dictionaryPath` の辞書だけで検出します。 |
 
 #### 辞書ファイルの書き方
 

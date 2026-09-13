@@ -8,7 +8,7 @@ import { type DictionaryEntry, dictionary } from "../dictionary";
 export type Options = {
     allows?: string[];
     dictionaryPath?: string;
-    useBuiltinDictionary?: boolean;
+    dictionaryMode?: "append" | "override";
 };
 
 const isDictionaryEntry = (value: unknown): value is DictionaryEntry => {
@@ -52,15 +52,22 @@ const createTester = (pattern: string): ((text: string) => boolean) => {
 const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
     const { Syntax, RuleError, report, getSource } = context;
     const testers = (options.allows ?? []).map(createTester);
+    const mode = options.dictionaryMode ?? "append";
+    if (mode !== "append" && mode !== "override") {
+        throw new Error(`dictionaryMode には "append" か "override" を指定してください。`);
+    }
+    if (mode === "override" && options.dictionaryPath === undefined) {
+        throw new Error(`dictionaryMode を "override" にするときは dictionaryPath も指定してください。`);
+    }
     const userDictionary =
         options.dictionaryPath === undefined
             ? []
             : loadDictionary(resolve(context.getConfigBaseDir() ?? process.cwd(), options.dictionaryPath));
-    const builtinDictionary = (options.useBuiltinDictionary ?? true) ? dictionary : [];
+    const dictionaries = mode === "override" ? userDictionary : [...dictionary, ...userDictionary];
     // kuromojin は readonly の配列を返すので、複製してから渡す。
     const matchAll = createTextlintMatcher({
         tokenize: async (text) => [...(await tokenize(text))],
-        dictionaries: [...builtinDictionary, ...userDictionary]
+        dictionaries
     });
     return {
         async [Syntax.Str](node) {

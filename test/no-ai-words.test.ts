@@ -66,8 +66,8 @@ tester.run("no-ai-words", rule, {
         },
         {
             text: "MDX の経路が 2 つあります。",
-            options: { dictionaryPath: userDictionaryPath, useBuiltinDictionary: false },
-            description: "useBuiltinDictionary を false にすると内蔵の辞書の語は指摘しない"
+            options: { dictionaryPath: userDictionaryPath, dictionaryMode: "override" },
+            description: "dictionaryMode を override にすると内蔵の辞書の語は指摘しない"
         }
     ],
     invalid: [
