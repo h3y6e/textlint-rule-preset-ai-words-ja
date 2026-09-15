@@ -354,9 +354,8 @@ export const dictionary: DictionaryEntry[] = [
     tokens: [noun("門")],
   },
   {
-    // kuromoji は「ゲートウェイ」を ゲート + ウェイ に割るため、後ろに助詞などが続くときだけ拾う。
     message:
       '"ゲート" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。',
-    tokens: [noun("ゲート"), { pos: ["助詞", "助動詞", "記号"] }],
+    tokens: [noun("ゲート")],
   },
 ];
