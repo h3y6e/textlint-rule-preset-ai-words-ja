@@ -343,4 +343,19 @@ export const dictionary: DictionaryEntry[] = [
       { pos: "動詞", pos_detail_1: "接尾", basic_form: ["れる", "られる"] },
     ],
   },
+  {
+    message:
+      '"無言" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。',
+    tokens: [noun("無言")],
+  },
+  {
+    message:
+      '"門" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。',
+    tokens: [noun("門")],
+  },
+  {
+    message:
+      '"ゲート" はAIが書いた文章で多用される表現です。別の表現に言い換えられないか検討してください。',
+    tokens: [noun("ゲート")],
+  },
 ];

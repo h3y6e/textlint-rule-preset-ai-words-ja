@@ -171,6 +171,9 @@ npm install --save-dev textlint-rule-preset-ai-words-ja
 | 定石 |
 | 〜した瞬間 |
 | 静かに |
+| 無言 |
+| 門 |
+| ゲート |
 
 <!-- textlint-enable ai-words-ja/no-ai-words -->
 
